@@ -9,11 +9,13 @@ const customBaseQuery = (
 
   return async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions)
-
     // ↑のリクエストが認証エラーでレスポンスが401だった場合にリトライ
-    if (result.error && result.error.status === 401) {
+    if (
+      result.error &&
+      (result.error.status === 401 || result.error.status === 'FETCH_ERROR')
+    ) {
       localStorage.clear()
-      window.location.href = 'login'
+      window.location.href = '/login'
     }
 
     return result

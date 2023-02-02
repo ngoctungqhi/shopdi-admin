@@ -5,37 +5,40 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AppLoginPage } from './components/appLoginPage/appLoginPage'
 import { AppRequireAuthRouteElement } from './components/appRequireAuthRouteElement/appRequireAuthRouteElement'
 import { AppLayoutRouteElement } from './components/appLayoutRouteElement/appLayoutRouteElement'
-import { Web3ReactProvider } from '@web3-react/core'
-import { getLibrary } from 'utils/web3React'
-
-import { Dashboard } from 'features/dashboard/dashboard'
-import { IdoPage } from 'features/idoPage/idoPage'
-import { IdoForm } from 'features/idoPage/components/idoForm/idoForm'
-import { StakePage } from 'features/stakePage/stakePage'
-import { EkycPage } from 'features/ekycPage/ekycPage'
+import { Users } from 'features/users/users'
+import { Products } from 'features/products/products'
+import { Orders } from 'features/orders/orders'
+import { Vouchers } from 'features/vouchers/vouchers'
+import { VoucherBlockchain } from 'features/voucherBlockchain/voucherBlockchain'
+import { MainWallet } from 'features/mainWallet/mainWallet'
+import { OperationWallet } from 'features/operationWallet/operationWallet'
+import { Settings } from 'features/settings/settings'
 
 export const App = memo(() => {
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <Provider store={store}>
-        <Router>
-          <Routes>
-            <Route path="login" element={<AppLoginPage />} />
-            <Route element={<AppRequireAuthRouteElement />}>
-              <Route element={<AppLayoutRouteElement />}>
-                <Route path="/">
-                  <Route index element={<Dashboard />} />
-                  <Route path="ido" element={<IdoPage />} />
-                  <Route path="ido/add" element={<IdoForm />} />
-                  <Route path="ido/edit/:id" element={<IdoForm />} />
-                  <Route path="stake" element={<StakePage />} />
-                  <Route path="ekyc" element={<EkycPage />} />
-                </Route>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path="login" element={<AppLoginPage />} />
+          <Route element={<AppRequireAuthRouteElement />}>
+            <Route element={<AppLayoutRouteElement />}>
+              <Route path="/admin">
+                <Route path="users" element={<Users />} />
+                <Route path="products" element={<Products />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="vouchers" element={<Vouchers />} />
+                <Route
+                  path="voucher-blockchain"
+                  element={<VoucherBlockchain />}
+                />
+                <Route path="main-wallet" element={<MainWallet />} />
+                <Route path="operation-wallet" element={<OperationWallet />} />
+                <Route path="settings" element={<Settings />} />
               </Route>
             </Route>
-          </Routes>
-        </Router>
-      </Provider>
-    </Web3ReactProvider>
+          </Route>
+        </Routes>
+      </Router>
+    </Provider>
   )
 })

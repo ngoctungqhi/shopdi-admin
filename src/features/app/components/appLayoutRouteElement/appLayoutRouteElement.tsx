@@ -7,12 +7,15 @@ import { Layout, Menu, Modal } from 'antd'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UnorderedListOutlined,
-  DatabaseOutlined,
   TeamOutlined,
-  HomeOutlined,
+  ShopOutlined,
+  GoldOutlined,
+  TagOutlined,
+  TagsOutlined,
+  WalletOutlined,
+  SettingOutlined,
 } from '@ant-design/icons'
-import logoPng from 'assets/logo.png'
+import logoPng from 'assets/logo.svg'
 const { Header, Sider, Content } = Layout
 
 export const AppLayoutRouteElement: FC = memo(() => {
@@ -28,7 +31,7 @@ export const AppLayoutRouteElement: FC = memo(() => {
   return (
     <Layout className="!min-h-screen">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="py-2 text-center">
+        <div className="py-2 text-center mb-5 overflow-hidden">
           <img src={logoPng} className="mx-auto max-w-full" alt="" />
         </div>
         <Menu
@@ -38,24 +41,50 @@ export const AppLayoutRouteElement: FC = memo(() => {
           onClick={handleChaneMenu}
           items={[
             {
-              key: '/',
-              icon: <HomeOutlined />,
-              label: 'Dashboard',
-            },
-            {
-              key: '/ido',
-              icon: <UnorderedListOutlined />,
-              label: 'IDO',
-            },
-            {
-              key: '/stake',
-              icon: <DatabaseOutlined />,
-              label: 'Stake',
-            },
-            {
-              key: '/ekyc',
+              key: '/admin/users',
               icon: <TeamOutlined />,
-              label: 'EKYC',
+              label: 'Người dùng',
+            },
+            {
+              key: '/admin/products',
+              icon: <ShopOutlined />,
+              label: 'Sản phẩm',
+            },
+            {
+              key: '/admin/orders',
+              icon: <GoldOutlined />,
+              label: 'Đơn đặt hàng',
+            },
+            {
+              key: '/admin/vouchers',
+              icon: <TagOutlined />,
+              label: 'Vouchers',
+            },
+            {
+              key: '/admin/voucher-blockchain',
+              icon: <TagsOutlined />,
+              label: 'Voucher Blockchain',
+            },
+            {
+              key: '/admin/main-wallet',
+              icon: <WalletOutlined />,
+              label: 'Ví tổng',
+            },
+            {
+              key: '/admin/operation-wallet',
+              icon: <WalletOutlined />,
+              label: 'Ví con',
+            },
+            {
+              key: '/admin/settings',
+              icon: <SettingOutlined />,
+              label: 'Cài đặt',
+              children: [
+                {
+                  key: '/admin/settings/banner',
+                  label: 'Banner quảng cáo',
+                },
+              ],
             },
           ]}
         />
