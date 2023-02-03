@@ -13,6 +13,7 @@ import { VoucherBlockchain } from 'features/voucherBlockchain/voucherBlockchain'
 import { MainWallet } from 'features/mainWallet/mainWallet'
 import { OperationWallet } from 'features/operationWallet/operationWallet'
 import { Settings } from 'features/settings/settings'
+import { AccountSettings } from 'features/accountSettings/accountSettings'
 
 export const App = memo(() => {
   return (
@@ -34,6 +35,7 @@ export const App = memo(() => {
                 <Route path="main-wallet" element={<MainWallet />} />
                 <Route path="operation-wallet" element={<OperationWallet />} />
                 <Route path="settings" element={<Settings />} />
+                <Route path="account-settings" element={<AccountSettings />} />
               </Route>
             </Route>
           </Route>

@@ -1,8 +1,11 @@
 import { useAppDispatch } from 'states/hooks'
 import { useCallback, useState } from 'react'
-import { useLoginMutation } from 'features/app/apis/appApis'
+import {
+  useLoginMutation,
+  useLazyGetAccountInfoQuery,
+} from 'features/app/apis/appApis'
 import { message } from 'antd'
-import { setToken } from 'features/app/states/appSlice'
+import { setLoggedInUser, setToken } from 'features/app/states/appSlice'
 import { useNavigate } from 'react-router-dom'
 
 type FormValues = {
@@ -12,6 +15,8 @@ type FormValues = {
 
 export const useAppLoginPage = () => {
   const [loginMutation] = useLoginMutation()
+  const [lazyGetAccountInfoQuery] = useLazyGetAccountInfoQuery()
+
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -22,7 +27,10 @@ export const useAppLoginPage = () => {
         setIsLoading(true)
         const result = await loginMutation({ ...values }).unwrap()
         setIsLoading(false)
-        dispatch(setToken(result.data.token))
+        dispatch(setToken(result.token))
+
+        const response = await lazyGetAccountInfoQuery().unwrap()
+        dispatch(setLoggedInUser(response))
         navigate('/admin/users')
       } catch (error) {
         console.log(error)
@@ -30,7 +38,7 @@ export const useAppLoginPage = () => {
         message.error('Login failed!')
       }
     },
-    [dispatch, loginMutation, navigate]
+    [dispatch, lazyGetAccountInfoQuery, loginMutation, navigate]
   )
 
   return { handleSubmitForm, isLoading }

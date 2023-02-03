@@ -17,7 +17,7 @@ export const useUsers = () => {
       setTotalRecord(response.totalRecord)
     }
 
-    getUsers()
+    // getUsers()
   }, [lazyGetUsersQuery, page])
 
   const getSex = (gender: number) => {

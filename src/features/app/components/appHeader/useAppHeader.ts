@@ -1,30 +1,18 @@
-import { openSelectWalletModal } from 'features/app/states/appSlice'
-import { useCallback, useEffect } from 'react'
-import { useAppDispatch } from 'states/hooks'
-import { useWeb3React } from '@web3-react/core'
-import { connectorsByName } from 'utils/web3React'
-import { useAuth } from 'hooks/useAuth'
+import { removeToken } from 'features/app/states/appSlice'
+import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from 'states/hooks'
 
 export const useAppHeader = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { activate } = useWeb3React()
-  const { logout } = useAuth()
 
-  useEffect(() => {
-    const provider = window.localStorage.getItem('provider')
-    if (provider) activate(connectorsByName[provider])
-  }, [activate])
-
-  const handleOpenSelectWalletModal = useCallback(() => {
-    dispatch(openSelectWalletModal())
-  }, [dispatch])
+  const loggedInUser = useAppSelector((state) => state.app.loggedInUser)
 
   const handleLogout = useCallback(() => {
-    logout()
+    dispatch(removeToken())
     navigate('/login')
-  }, [logout, navigate])
+  }, [dispatch, navigate])
 
-  return { handleOpenSelectWalletModal, handleLogout }
+  return { handleLogout, loggedInUser }
 }

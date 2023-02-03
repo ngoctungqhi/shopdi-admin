@@ -1,9 +1,8 @@
 import React, { FC, memo } from 'react'
 import { AppHeader } from 'features/app/components/appHeader/appHeader'
-import { WalletModal } from '../../../../components/walletModal/walletModal'
 import { useAppLayoutRouteElement } from './useAppLayoutRouteElement'
 import { Outlet } from 'react-router-dom'
-import { Layout, Menu, Modal } from 'antd'
+import { Layout, Menu } from 'antd'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -19,14 +18,8 @@ import logoPng from 'assets/logo.svg'
 const { Header, Sider, Content } = Layout
 
 export const AppLayoutRouteElement: FC = memo(() => {
-  const {
-    isOpenSelectWalletModal,
-    handleCancel,
-    collapsed,
-    setCollapsed,
-    handleChaneMenu,
-    selectedMenuItem,
-  } = useAppLayoutRouteElement()
+  const { collapsed, setCollapsed, handleChaneMenu, selectedMenuItem } =
+    useAppLayoutRouteElement()
 
   return (
     <Layout className="!min-h-screen">
@@ -104,15 +97,6 @@ export const AppLayoutRouteElement: FC = memo(() => {
           <Outlet />
         </Content>
       </Layout>
-
-      <Modal
-        title="Select wallet"
-        open={isOpenSelectWalletModal}
-        onCancel={handleCancel}
-        footer={null}
-      >
-        <WalletModal />
-      </Modal>
     </Layout>
   )
 })

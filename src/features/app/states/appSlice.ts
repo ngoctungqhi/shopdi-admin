@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { GetAccountInfoResponse } from '../apis/models/getAccountInfo/response'
 
 type AppStateType = {
   token?: string
-  isOpenSelectWalletModal: boolean
+  loggedInUser: GetAccountInfoResponse | null
 }
 
 const initialAppState: AppStateType = {
   token: localStorage.getItem('token') || undefined,
-  isOpenSelectWalletModal: false,
+  loggedInUser: JSON.parse(localStorage.getItem('loggedInUser')) || null,
 }
 
 export const appSlice = createSlice({
@@ -18,14 +19,17 @@ export const appSlice = createSlice({
       state.token = action.payload
       localStorage.setItem('token', state.token)
     },
-    openSelectWalletModal: (state) => {
-      state.isOpenSelectWalletModal = true
+    setLoggedInUser: (state, action: PayloadAction<GetAccountInfoResponse>) => {
+      state.loggedInUser = action.payload
+      localStorage.setItem('loggedInUser', JSON.stringify(state.loggedInUser))
     },
-    closeSelectWalletModal: (state) => {
-      state.isOpenSelectWalletModal = false
+    removeToken: (state) => {
+      state.token = undefined
+      localStorage.removeItem('token')
+      state.loggedInUser = null
+      localStorage.removeItem('loggedInUser')
     },
   },
 })
 
-export const { setToken, openSelectWalletModal, closeSelectWalletModal } =
-  appSlice.actions
+export const { setToken, removeToken, setLoggedInUser } = appSlice.actions
