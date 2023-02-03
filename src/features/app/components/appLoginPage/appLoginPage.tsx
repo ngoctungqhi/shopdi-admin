@@ -1,6 +1,11 @@
 import { memo } from 'react'
 import { Form, Input, Button, Col, Row, Checkbox } from 'antd'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import {
+  UserOutlined,
+  LockOutlined,
+  EyeTwoTone,
+  EyeInvisibleOutlined,
+} from '@ant-design/icons'
 import { useAppLoginPage } from './useAppLoginPage'
 import logoSvg from 'assets/logo.svg'
 import lineSvg from 'assets/line.svg'
@@ -58,11 +63,13 @@ export const AppLoginPage = memo(() => {
                       { required: true, message: 'Vui lòng nhập mật khẩu' },
                     ]}
                   >
-                    <Input
+                    <Input.Password
                       prefix={<LockOutlined />}
                       className="h-10"
-                      type="password"
                       placeholder="Password"
+                      iconRender={(visible) =>
+                        visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                      }
                     />
                   </Form.Item>
                   <Form.Item>

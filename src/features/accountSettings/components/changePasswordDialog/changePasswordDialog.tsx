@@ -1,5 +1,6 @@
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import { Button, Col, Form, Input, Row } from 'antd'
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { useChangePasswordDialog } from './useChangePasswordDialog'
 
 export type ChangePasswordDialogProps = {
@@ -12,7 +13,7 @@ export const ChangePasswordDialog = memo((props: ChangePasswordDialogProps) => {
     <div>
       <Row>
         <Col span={24}>
-          <Form className="mt-10" layout="vertical" onFinish={handleSubmitForm}>
+          <Form className="mt-5" layout="vertical" onFinish={handleSubmitForm}>
             <Form.Item
               name="oldPassword"
               label="Mật khẩu cũ"
@@ -25,7 +26,12 @@ export const ChangePasswordDialog = memo((props: ChangePasswordDialogProps) => {
               ]}
               hasFeedback
             >
-              <Input className="h-10" type="password" />
+              <Input.Password
+                className="h-10"
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+              />
             </Form.Item>
             <Form.Item
               name="newPassword"
@@ -35,11 +41,16 @@ export const ChangePasswordDialog = memo((props: ChangePasswordDialogProps) => {
                 { required: true, message: 'Vui lòng nhập mật khẩu mới' },
               ]}
             >
-              <Input className="h-10" type="password" />
+              <Input.Password
+                className="h-10"
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+              />
             </Form.Item>
             <Form.Item>
               <Button
-                className="w-full mt-10"
+                className="w-full mt-5"
                 type="primary"
                 htmlType="submit"
                 loading={isLoading}
