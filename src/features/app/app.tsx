@@ -14,6 +14,7 @@ import { MainWallet } from 'features/mainWallet/mainWallet'
 import { OperationWallet } from 'features/operationWallet/operationWallet'
 import { Settings } from 'features/settings/settings'
 import { AccountSettings } from 'features/accountSettings/accountSettings'
+import { AdminAccounts } from 'features/adminAccounts/adminAccounts'
 
 export const App = memo(() => {
   return (
@@ -36,6 +37,7 @@ export const App = memo(() => {
                 <Route path="operation-wallet" element={<OperationWallet />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="account-settings" element={<AccountSettings />} />
+                <Route path="admin-accounts" element={<AdminAccounts />} />
               </Route>
             </Route>
           </Route>

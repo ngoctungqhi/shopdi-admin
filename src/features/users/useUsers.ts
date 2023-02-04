@@ -9,15 +9,12 @@ export const useUsers = () => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const response = await lazyGetUsersQuery({
-        pageIndex: page,
-        pageSize: 10,
-      }).unwrap()
+      const response = await lazyGetUsersQuery({}).unwrap()
       setUsers(response.data)
       setTotalRecord(response.totalRecord)
     }
 
-    // getUsers()
+    getUsers()
   }, [lazyGetUsersQuery, page])
 
   const getSex = (gender: number) => {

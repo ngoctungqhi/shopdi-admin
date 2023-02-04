@@ -1,6 +1,6 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import { Button, Col, Form, Input, Row } from 'antd'
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import { useChangePasswordDialog } from './useChangePasswordDialog'
 
 export type ChangePasswordDialogProps = {

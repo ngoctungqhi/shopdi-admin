@@ -77,6 +77,10 @@ export const AppLayoutRouteElement: FC = memo(() => {
                   key: '/admin/settings/banner',
                   label: 'Banner quảng cáo',
                 },
+                {
+                  key: '/admin/admin-accounts',
+                  label: 'Tài khoản quản trị',
+                },
               ],
             },
           ]}

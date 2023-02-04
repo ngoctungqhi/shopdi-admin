@@ -6,7 +6,7 @@ const userApis = apis.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query<GetUsersResponse, GetUsersRequest>({
       query: (params) => ({
-        url: 'users',
+        url: 'admin/users',
         method: 'GET',
         params,
       }),
